@@ -1,5 +1,5 @@
 # Constants
-This is a list of constants that FCP uses. It is ~probably~ not exhaustive.
+This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 
 ## Message types
 | name | number |
