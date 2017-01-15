@@ -2,6 +2,49 @@ var net = require('net');
 var CONSTS = require('./consts');
 var commandParser = require('./commandParser');
 
+var hexDump = function(buffer) {
+	if (buffer.length > 200) {
+		console.log("(over 200 bytes, skipped)");
+		process.stdout.write("\n");
+		return;
+	}
+	for (var i = 0; i <= Math.ceil(buffer.length / 16); i++) {
+		for (var off = 0; off < 16; off++) {
+			var pos = (i * 16) + off;
+			if (pos >= buffer.length) {
+				process.stdout.write("   ");
+				continue;
+			}
+			var char = buffer.readUInt8(pos);
+
+			if (char < 16) {
+				process.stdout.write("0");
+			}
+			process.stdout.write(char.toString(16));
+			process.stdout.write(" ");
+		}
+
+		process.stdout.write("   ");
+
+		for (var off = 0; off < 16; off++) {
+			var pos = (i * 16) + off;
+			if (pos >= buffer.length) {
+				process.stdout.write(" ");
+				continue;
+			}
+			var char = buffer.readUInt8(pos);
+
+			if (char > 32 && char < 128) {
+				process.stdout.write(String.fromCharCode(char));
+			} else {
+				process.stdout.write(".");
+			}
+		}
+
+		process.stdout.write("\n");
+	}
+};
+
 net.createServer(function(client) {
 	console.log("[*] Incoming connection from " + client.remoteAddress + ":" + client.remotePort);
 	
@@ -11,6 +54,7 @@ net.createServer(function(client) {
 
 		remote.on('data', function(data) {
 			console.log("[ Remote -> Client ] " + commandParser.toString(new Buffer(data)));
+			hexDump(data);
 			client.write(data);
 		});
 
@@ -23,6 +67,7 @@ net.createServer(function(client) {
 
 		client.on('data', function(data) {
 			console.log("[ Client -> Remote ] " + commandParser.toString(new Buffer(data)));
+			hexDump(data);
 			remote.write(data);
 		});
 

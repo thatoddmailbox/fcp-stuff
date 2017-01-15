@@ -55,6 +55,15 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 ## Object IDs
 | name | number |
 | ---- | ------ |
+| NULLOBJID | -1 |
 | SESSIONDATAOBJID | -3 |
+| NOTIFYCHANGEOBJID | -5 |
 | AUTHENTICATEOBJID | -6 |
 | ENCRYPTIONOBJID | -9 |
+| MEMFORMOBJID | -7 |
+| MAILBOXOBJID | 2 |
+| RESUMEOBJID | 3 |
+| PREFSOBJID | 6 |
+| CHATOBJID | 7 |
+| SYSINFOOBJID | 8 |
+| SEARCHOBJID | 9 |
