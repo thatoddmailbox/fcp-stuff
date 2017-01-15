@@ -1,0 +1,6 @@
+{
+	"name": "fcp-proxy",
+	"version": "0.1.0",
+	"description": "A proxy for FirstClass Protocol that allows you to inspect the packets being sent.",
+	"main": "main.js"
+}

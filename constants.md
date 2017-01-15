@@ -1,7 +1,7 @@
 # Constants
 This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 
-## Message types
+## Command types
 | name | number |
 | ---- | ------ |
 | cLogin | 4 |
@@ -45,7 +45,6 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | cObjRetrieval | 66 |
 | cObjOpenQuery | 68 |
 
-
 ## Return codes
 | name | number |
 | ---- | ------ |
@@ -57,3 +56,5 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | name | number |
 | ---- | ------ |
 | SESSIONDATAOBJID | -3 |
+| AUTHENTICATEOBJID | -6 |
+| ENCRYPTIONOBJID | -9 |
