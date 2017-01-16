@@ -11,18 +11,13 @@ FirstClass has a super-secret debug console hidden inside of it. It seems like y
 To do this, use a hex editor to find the sequence `0F 85 35 00 00 00 66 8B` and replace it with `0F 84 35 00 00 00 66 8B` (the `85` becomes `84`). Then, run the binary of the application (not the application, but the binary inside of the .app. You want to see the console output), log in, and in the view where you see the icons (like your mailbox and trash and etc), press the `?`, and you will see this menu:
 
 
-```p - Packet Debug
-d - dump the packets currently in the buffer
-
-l - open console, not useful if you can see this, but for next time
-
-a - lookup an address to get the symbol closest to it
-
-t - do a not very useful traceback
-
-s - Toggle Steve's super mode
-
-b - Toggle save message bodies and docedit to download```
+    p - Packet Debug
+    d - dump the packets currently in the buffer
+    l - open console, not useful if you can see this, but for next time
+    a - lookup an address to get the symbol closest to it
+    t - do a not very useful traceback
+    s - Toggle Steve's super mode
+    b - Toggle save message bodies and docedit to download
 
 
 The most useful option is `p`, which opens a packet debugging window that shows you what packets are sent and received for different actions.
