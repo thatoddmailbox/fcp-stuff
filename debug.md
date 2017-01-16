@@ -13,10 +13,15 @@ To do this, use a hex editor to find the sequence `0F 85 35 00 00 00 66 8B` and 
 
 ```p - Packet Debug
 d - dump the packets currently in the buffer
+
 l - open console, not useful if you can see this, but for next time
+
 a - lookup an address to get the symbol closest to it
+
 t - do a not very useful traceback
+
 s - Toggle Steve's super mode
+
 b - Toggle save message bodies and docedit to download```
 
 
