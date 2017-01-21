@@ -60,6 +60,21 @@ var getCommandName = function(num) {
 
 module.exports = {
 	commands: commands,
+
+	extractPackets: function(data) {
+		var currentIndex = 0;
+		var packets = [];
+
+		while (currentIndex < data.length) {
+			var dataLen = data.readUInt16BE(currentIndex + 6);
+			packets.push(data.slice(currentIndex, currentIndex + dataLen + 8));
+			currentIndex += dataLen;
+			currentIndex += 8;
+		}
+
+		return packets;
+	},
+
 	toString: function(buf) {
 		var returnStr = "";
 
@@ -75,6 +90,7 @@ module.exports = {
 			returnStr += "Cmd: " + getCommandName(commandNumber) + " ";
 			returnStr += "CRC: " + crc + " ";
 			returnStr += "Len: " + dataLen + " ";
+			returnStr += "PktLen: " + buf.length + " ";
 		} catch (e) {
 			returnStr = "*** MALFORMED ***";
 		}

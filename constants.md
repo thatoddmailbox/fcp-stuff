@@ -67,3 +67,19 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | CHATOBJID | 7 |
 | SYSINFOOBJID | 8 |
 | SEARCHOBJID | 9 |
+
+
+## Data types
+| name | number |
+| ---- | ------ |
+| fcpLoginDigest | 1002 |
+| fcpLoginUserid | 1003 |
+| fcpLoginPassword | 1004 |
+| fcpMD5Challenge | 1006 |
+| fcpLoginTicket | 1009 |
+| fcpLoginOptions | 1010 | 
+| ENCRYPTION_METHOD_FIELD_ID | 1000 |
+| ENCRYPTION_SERVER_PUB_KEY_E_FIELD_ID | 1100 |
+| ENCRYPTION_SERVER_PUB_KEY_N_FIELD_ID | 1104 |
+| ENCRYPTION_SERVER_SYM_KEY_FIELD_ID | 1200 |
+| ENCRYPTION_CLIENT_SYM_KEY_FIELD_ID | 1201 |

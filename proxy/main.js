@@ -6,7 +6,7 @@ var commandParser = require('./commandParser');
 var txSeed = 2171034441;
 var rxSeed = 2171034441;
 
-var hexDump = function(buffer) {
+var hexDump = function(buffer, normalBuf) {
 	if (buffer.length > 200) {
 		//console.log("(over 200 bytes, skipped)");
 		//process.stdout.write("\n");
@@ -69,19 +69,24 @@ net.createServer(function(client) {
 		console.log("[*] Connection established to " + CONSTS.REMOTE_IP + ":" + CONSTS.FCP_PORT);
 
 		remote.on('data', function(data) {
-			console.log("[ Remote -> Client ] " + commandParser.toString(data));
-			
+			var packets = commandParser.extractPackets(data);
+
 			client.write(data);
 
-			var dataBuf = new Buffer(data.length - 8);
-			data.copy(dataBuf, 0, 8);
-			var decryptedData = decryptRx(dataBuf);
-			hexDump(decryptedData);
+			for (var i = 0; i < packets.length; i++) {
+				var packet = packets[i];
+				console.log("[ Remote -> Client ] " + commandParser.toString(packet));
+			
+				var dataBuf = new Buffer(packet.readUInt16BE(6));
+				packet.copy(dataBuf, 0, 8, 8 + packet.readUInt16BE(6));
+				var decryptedData = decryptRx(dataBuf);
+				hexDump(decryptedData, packet);
 
-			if (data.readUInt8(3) == 51) {
-				// cConnReq, so set the rxSeed
-				txSeed = decryptedData.readUInt32BE(16) >>> 0;
-				console.log("[*] rxSeed set to " + rxSeed);
+				if (packet.readUInt8(3) == 51) {
+					// cConnReq, so set the rxSeed
+					rxSeed = decryptedData.readUInt32BE(16) >>> 0;
+					console.log("[*] rxSeed set to " + rxSeed);
+				}
 			}
 		});
 
@@ -92,19 +97,40 @@ net.createServer(function(client) {
 			process.exit(0);
 		});
 
+		var q = 0;
+
 		client.on('data', function(data) {
-			console.log("[ Client -> Remote ] " + commandParser.toString(new Buffer(data)));
-			
+			var packets = commandParser.extractPackets(data);
+
 			remote.write(data);
 
-			var dataBuf = new Buffer(data.length - 8);
-			data.copy(dataBuf, 0, 8);
-			var decryptedData = decryptTx(dataBuf);
-			hexDump(decryptedData);
-			if (data.readUInt8(3) == 51) {
-				// cConnReq, so set the txSeed
-				txSeed = decryptedData.readUInt32BE(14) >>> 0;
-				console.log("[*] txSeed set to " + txSeed);
+			for (var i = 0; i < packets.length; i++) {
+				var packet = packets[i];
+
+				console.log("[ Client -> Remote ] " + commandParser.toString(packet));
+				
+				var dataBuf = new Buffer(packet.readUInt16BE(6));
+				packet.copy(dataBuf, 0, 8, 8 + packet.readUInt16BE(6));
+
+				console.log("BEFORE:");
+				hexDump(dataBuf);
+
+				var decryptedData = decryptTx(dataBuf);
+
+				console.log("AFTER:");
+				hexDump(decryptedData);
+
+				if (packet.readUInt8(3) == 51) {
+					// cConnReq, so set the txSeed
+					txSeed = decryptedData.readUInt32BE(14) >>> 0;
+					console.log("[*] txSeed set to " + txSeed);
+				}
+			}
+
+			q++;
+			if (q > 7) {
+				console.log("kthxbai");
+				process.exit(0);
 			}
 		});
 

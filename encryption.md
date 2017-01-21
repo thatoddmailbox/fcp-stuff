@@ -12,5 +12,4 @@ There seems to be multiple types of encryption available:
 * None
 
 
-The default seems to be Legacy, which is a fancy XOR with a seed value exchanged during the connection. The default seed value, used for encrypting the initial cConnReq messages, is `2171034441`. The seed is then changed after each message. You can see the actual algorithm implemented in `proxy/fcp.js`.
-
+The default seems to be Legacy, which is a fancy XOR with a seed value exchanged during the connection. The default seed value, used for encrypting the initial cConnReq messages, is `2171034441`. The seed is then changed after each message. You can see the actual algorithm implemented in `proxy/fcp.js`. You can also see pseudo-C code of the algorithm in `encrypt.c`, translated by hand from the x86 assembly of the FirstClass binary. (it probably doesn't compile, though)
