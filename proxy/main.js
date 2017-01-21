@@ -112,12 +112,12 @@ net.createServer(function(client) {
 				var dataBuf = new Buffer(packet.readUInt16BE(6));
 				packet.copy(dataBuf, 0, 8, 8 + packet.readUInt16BE(6));
 
-				console.log("BEFORE:");
-				hexDump(dataBuf);
+				/*console.log("BEFORE:");
+				hexDump(dataBuf);*/
 
 				var decryptedData = decryptTx(dataBuf);
 
-				console.log("AFTER:");
+				//console.log("AFTER:");
 				hexDump(decryptedData);
 
 				if (packet.readUInt8(3) == 51) {
@@ -127,11 +127,11 @@ net.createServer(function(client) {
 				}
 			}
 
-			q++;
+			/*q++;
 			if (q > 7) {
 				console.log("kthxbai");
 				process.exit(0);
-			}
+			}*/
 		});
 
 		client.on('close', function(data) {
