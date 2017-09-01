@@ -1,7 +1,8 @@
 # Constants
 This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 
-## Command types
+## Commands
+### Command numbers
 | name | number |
 | ---- | ------ |
 | cLogin | 4 |
@@ -45,14 +46,14 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | cObjRetrieval | 66 |
 | cObjOpenQuery | 68 |
 
-## Return codes
+### Return codes
 | name | number |
 | ---- | ------ |
 | NoError | 0 |
 | eDiskLimit | 1093 |
 
-
-## Object IDs
+## Objects
+### Object IDs
 | name | number |
 | ---- | ------ |
 | NULLOBJID | -1 |
@@ -69,8 +70,74 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | SYSINFOOBJID | 8 |
 | SEARCHOBJID | 9 |
 
+### Object types
+| name | number |
+| ---- | ------ |
+| lFileInfo    | 1 |
+| lShortInfo   | 2 |
+| dEnvInfo     | 3 |
+| dToName      | 4 |
+| dCopyName    | 5 |
+| dBody        | 6 |
+| dAttach      | 7 |
+| dFromName    | 8 |
+| dSubject     | 9 |
+| dODName      | 10 |
+| fDataFork    | 12 |
+| fResFork     | 13 |
+| dBCCNames    | 14 |
+| lURFlag      | 15 |
+| lAppFlag     | 16 |
+| aConfGroup   | 19 |
+| dFormData    | 20 |
+| dHistory     | 21 |
+| dChatMsg     | 22 |
+| dChatName    | 23 |
+| dEOF         | 24 |
+| dInviteChat  | 25 |
+| dFileInfo    | 27 |
+| aAccess      | 29 |
+| aMembers     | 30 |
+| dFwdNames    | 34 |
+| dMsgOptions  | 37 |
+| dThreadID    | 38 |
+| dMessageID   | 39 |
+| dSysID       | 40 |
+| dDocEditData | 42 |
+| fFileHdr     | 43 |
+| lFormData    | 44 |
+| lDelFlag     | 48 |
+| dIndex       | 50 |
+| dEStatus     | 51 |
+| odFCName     | 55 |
+| dAltBody     | 70 |
+| lWatch       | 72 |
+| lThreadInfo  | 74 |
+| dbProgress   | 1900 |
+
+### Typed folders
+| name | number |
+| ---- | ------ |
+| Mailbox          | 1 |
+| Contacts         | 7 |
+| Bookmarks        | 16 |
+| VoiceGreetings   | 20 |
+| Calendar         | 21 |
+| ResourceCalendar | 22 |
+| LocationCalendar | 23 |
+| GroupCalendar    | 28 |
+| MyDocuments      | 32 |
+| SharedDocuments  | 33 |
+| Files            | 40 |
+| Community        | 66 |
+| Pulse            | 67 |
+| FCXIM            | 71 |
+| FCXIMCollection  | 72 |
+| Apps             | 74 |
+| PersonalAppsData | 75 |
 
 ## Form fields
+### Form field IDs
 | name | number |
 | ---- | ------ |
 | lShortInfo | 2 |
@@ -114,3 +181,46 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | fcpNotifyCapabilities | 7036 |
 | fcpPWSeed             | 7038 |
 | fcpUIExclusions       | 7039 |
+
+### Field data types
+| name | number |
+| ---- | ------ |
+| fdString         | 0 |
+| fdCheckBox       | 6 |
+| fdShort          | 7 |
+| fdLong           | 14 |
+| fdPopupList      | 80 |
+| fdMacText        | 100 |
+| fdMacPicture     | 101 |
+| fdMacSound       | 102 |
+| fdGIF            | 103 |
+| fdWinBMP         | 104 |
+| fdWinWAV         | 105 |
+| fdByte           | 106 |
+| fdText           | 107 |
+| fdSound          | 108 |
+| fdImage          | 109 |
+| fdButton         | 110 |
+| fdStyleData      | 111 |
+| fdClearField     | 112 |
+| fdSetListCount   | 113 |
+| fdAttributes     | 114 |
+| fdSetFocus       | 115 |
+| fdSelect         | 116 |
+| fdFormAction     | 117 |
+| fdPropertyStream | 118 |
+| fdFloat          | 119 |
+| fdDouble         | 120 |
+| fdShortInfo      | 121 |
+| fdBinary         | 122 |
+| fdRequestData    | 123 |
+| fdSetSelection   | 124 |
+| fdFCName         | 125 |
+| fdHistory        | 126 |
+| fdRemove         | 127 |
+| fdMediaStream    | 128 |
+| fdJPEG           | 129 |
+| fdHTML           | 130 |
+| fdINT64          | 131 |
+| fdResult         | 132 |
+| fdObjID          | 133 |
