@@ -59,8 +59,9 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | SESSIONDATAOBJID | -3 |
 | NOTIFYCHANGEOBJID | -5 |
 | AUTHENTICATEOBJID | -6 |
-| ENCRYPTIONOBJID | -9 |
 | MEMFORMOBJID | -7 |
+| ENCRYPTIONOBJID | -9 |
+| TYPEDFOLDEROBJID | 1 |
 | MAILBOXOBJID | 2 |
 | RESUMEOBJID | 3 |
 | PREFSOBJID | 6 |
@@ -69,17 +70,47 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | SEARCHOBJID | 9 |
 
 
-## Data types
+## Form fields
+| name | number |
+| ---- | ------ |
+| lShortInfo | 2 |
+| dSubject | 9 |
+| dMessageID | 39 |
+
+| name | number |
+| ---- | ------ |
+| ENCRYPTION_METHOD_FIELD_ID | 1000 |
+| ENCRYPTION_SERVER_PUB_KEY_E_FIELD_ID | 1100 |
+| ENCRYPTION_SERVER_PUB_KEY_N_FIELD_ID | 1104 |
+| ENCRYPTION_SERVER_SYM_KEY_FIELD_ID | 1200 |
+| ENCRYPTION_CLIENT_SYM_KEY_FIELD_ID | 1201 |
+
 | name | number |
 | ---- | ------ |
 | fcpLoginDigest | 1002 |
 | fcpLoginUserid | 1003 |
 | fcpLoginPassword | 1004 |
 | fcpMD5Challenge | 1006 |
+| fcpLoginConnAddress | 1008 |
 | fcpLoginTicket | 1009 |
 | fcpLoginOptions | 1010 | 
-| ENCRYPTION_METHOD_FIELD_ID | 1000 |
-| ENCRYPTION_SERVER_PUB_KEY_E_FIELD_ID | 1100 |
-| ENCRYPTION_SERVER_PUB_KEY_N_FIELD_ID | 1104 |
-| ENCRYPTION_SERVER_SYM_KEY_FIELD_ID | 1200 |
-| ENCRYPTION_CLIENT_SYM_KEY_FIELD_ID | 1201 |
+| fcpLoginClusterId  | 1018 |
+
+| name | number |
+| ---- | ------ |
+| fcpFirstName          | 7001 |
+| fcpInitials           | 7002 |
+| fcpLastName           | 7003 |
+| fcpPrimaryDomainName  | 7004 |
+| fcpLogoffTimer        | 7005 |
+| fcpSessionCID         | 7006 |
+| userTimeZone          | 7007 |
+| serverTimeZone        | 7008 |
+| fcpUserID             | 7012 |
+| fcpSessionOptions     | 7016 |
+| fcpPersonalMessage    | 7020 |
+| fcpMobileDeviceID     | 7025 |
+| fcpMobileAppID        | 7035 |
+| fcpNotifyCapabilities | 7036 |
+| fcpPWSeed             | 7038 |
+| fcpUIExclusions       | 7039 |

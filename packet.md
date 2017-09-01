@@ -5,8 +5,8 @@
 | "link session ID" | 2 bytes |
 | sequence # | 1 byte |
 | command # | 1 byte |
-| CRC | 2 byte |
-| data length | 2 byte |
+| CRC | 2 bytes |
+| data length | 2 bytes |
 | data | see above |
 
 ## Info
