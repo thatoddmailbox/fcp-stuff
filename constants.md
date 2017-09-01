@@ -236,3 +236,8 @@ Always equal to `2171034441`.
 | coNewEncryption      | 4096 |
 | coNewHeader          | 16384 |
 | coStandardEncryption | 32768 |
+
+## Character encodings
+| name | number |
+| ---- | ------ |
+| UTF-8 | 65001 |

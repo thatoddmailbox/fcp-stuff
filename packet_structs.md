@@ -7,13 +7,30 @@ All integers should be assumed to be big-endian.
 
 ## cConnReq and sConnReq
 Used to negotiate details about the connection. Must be the first packet sent from the client, and is always encrypted with the initial seed as given on the [constants](./constants.md) page. (`2171034441`)
+
 | field name   | field type | description |
 | ------------ | ---------- | ----------- |
 | Addr         | uint32     | default is 0, not sure what this does |
 | Sock         | uint16     | default is 0, not sure what this does |
 | SessionId    | uint16     | default is 0, not sure what this does |
-| Options      | uint16     | default is coStandardEncryption, coNewHeader, and  coLoginOptions (see [constants](./constants.md) page) |
+| Options      | uint16     | default is coStandardEncryption, coNewHeader, and  coLoginOptions (see [constants](./constants.md)) |
 | MaxPacketLen | uint16     | default is 1024 |
 | WindowSize   | uint16     | default is 4, not sure what this does |
 | Seed         | uint32     | should be randomly generated with a cryptographically secure RNG. If cConnReq, this seed will be used for all future packets sent from the client. If sConnReq, this seed will be used for all future packets sent from the server. |
 | Laps         | uint16     | default is 0, not sure what this does |
+
+## cLogin
+Used as part of the login process.
+
+| field name     | field type | description |
+| -------------- | ---------- | ----------- |
+| UserIDLength   | uint8      | length of following field (max of 15) |
+| UserID         | [15]byte   | the user ID you're logging in as |
+| PasswordLength | uint8      | length of following field (max of 12) |
+| Password       | [12]byte   | do NOT put the user's password here, as it is not secure |
+| Unknown1       | uint8      | default is 13, not sure what this does |
+| Version        | uint16     | must be 13 |
+| GUI            | uint16     | default is 12000, not sure what this does |
+| LogBits        | uint16     | default is 41984, not sure what this does |
+| Charset        | uint16     | the character encoding to use for the connection (see [constants](./constants.md)). recommended to be UTF-8 (65001) |
+| Method         | uint16     | default is 41984, not sure what this does |
