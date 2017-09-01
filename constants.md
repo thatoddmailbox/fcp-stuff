@@ -52,6 +52,10 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | NoError | 0 |
 | eDiskLimit | 1093 |
 
+### Initial seed
+Used for cConnReq and sConnReq messages.
+Always equal to `2171034441`.
+
 ## Objects
 ### Object IDs
 | name | number |
@@ -224,3 +228,11 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 | fdINT64          | 131 |
 | fdResult         | 132 |
 | fdObjID          | 133 |
+
+## Client options
+| name | number |
+| ---- | ------ |
+| coLoginOptions       | 2048 |
+| coNewEncryption      | 4096 |
+| coNewHeader          | 16384 |
+| coStandardEncryption | 32768 |

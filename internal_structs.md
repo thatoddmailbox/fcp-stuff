@@ -1,4 +1,4 @@
-# Structs
+# Internal client structs
 
 ## tPacketHdr
 (this is how it's represented in the fcc memory, _not_ over the wire!)

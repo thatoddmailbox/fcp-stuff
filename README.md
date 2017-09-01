@@ -5,4 +5,5 @@ things about the FirstClass protocol
 * [Debug](./debug.md)
 * [Encryption](./encryption.md)
 * [Packet format](./packet.md)
-* [Structs](./structs.md)
+* [Packet structs](./packet_structs.md)
+* [Internal client structs](./internal_structs.md)
