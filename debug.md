@@ -1,6 +1,8 @@
 # Debug console
 FirstClass has a super-secret debug console hidden inside of it. It seems like you should be able to access it from some sort of key combo on startup or something similar (have to look closer at the code), but right now, the easiest way to access it is to patch the client binary and change the check for the console from a `jnz` to a `jz`. 
 
+The packet debugger and the debug menu seems to have existed in some form since at least FirstClass 8.
+
 
 **note that this only applies to the Mac version 12.122 it will probably not work on another version**
 
