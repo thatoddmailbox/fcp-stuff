@@ -6,8 +6,13 @@ var commandParser = require('./commandParser');
 var txSeed = 2171034441;
 var rxSeed = 2171034441;
 
+var rxWaitingFor = -1;
+var rxBuffer = new Buffer(0);
+
+var rxState = "waiting-for-header";
+
 var hexDump = function(buffer, normalBuf) {
-	if (buffer.length > 200) {
+	if (buffer.length > 0) { //(buffer.length > 200 && buffer.length < 300) || buffer.length > 10000) {
 		//console.log("(over 200 bytes, skipped)");
 		//process.stdout.write("\n");
 		return;
@@ -68,7 +73,33 @@ net.createServer(function(client) {
 	remote.connect(CONSTS.FCP_PORT, CONSTS.REMOTE_IP, function() {
 		console.log("[*] Connection established to " + CONSTS.REMOTE_IP + ":" + CONSTS.FCP_PORT);
 
-		remote.on('data', function(data) {
+		remote.on('data', function(data) { //inputData) {
+			// rxBuffer = Buffer.concat([rxBuffer, inputData]);
+			// var data;
+
+			// if (rxState == "waiting-for-header") {
+			// 	if (rxBuffer.length < 8) {
+			// 		return; // no header yet :(
+			// 	}
+			// 	var packetSize = rxBuffer.readUInt16BE(6) + 8;
+			// 	rxState = "waiting-for-data";
+			// 	rxWaitingFor = packetSize;
+			// 	if (packetSize > rxBuffer.length) {
+			// 		return; // need more data
+			// 	}
+			// } else if (rxState == "waiting-for-data") {
+			// 	if (rxWaitingFor > rxBuffer.length) {
+			// 		return; // need more data
+			// 	}
+			// 	// we have enough data!
+			// 	data = new Buffer()		
+			// }
+
+			// rxWaitingFor = -1;
+			// var data = new Buffer(rxBuffer.length);
+			// rxBuffer.copy(data);
+			// rxBuffer = new Buffer(0);
+
 			var packets = commandParser.extractPackets(data);
 
 			client.write(data);
@@ -112,12 +143,8 @@ net.createServer(function(client) {
 				var dataBuf = new Buffer(packet.readUInt16BE(6));
 				packet.copy(dataBuf, 0, 8, 8 + packet.readUInt16BE(6));
 
-				/*console.log("BEFORE:");
-				hexDump(dataBuf);*/
-
 				var decryptedData = decryptTx(dataBuf);
 
-				//console.log("AFTER:");
 				hexDump(decryptedData);
 
 				if (packet.readUInt8(3) == 51) {
@@ -126,12 +153,6 @@ net.createServer(function(client) {
 					console.log("[*] txSeed set to " + txSeed);
 				}
 			}
-
-			/*q++;
-			if (q > 7) {
-				console.log("kthxbai");
-				process.exit(0);
-			}*/
 		});
 
 		client.on('close', function(data) {

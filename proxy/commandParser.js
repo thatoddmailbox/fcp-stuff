@@ -66,7 +66,13 @@ module.exports = {
 		var packets = [];
 
 		while (currentIndex < data.length) {
+			if (data.length < currentIndex + 8) {
+				break;
+			}
 			var dataLen = data.readUInt16BE(currentIndex + 6);
+			if (data.length < currentIndex + dataLen + 8) {
+				break;
+			}
 			packets.push(data.slice(currentIndex, currentIndex + dataLen + 8));
 			currentIndex += dataLen;
 			currentIndex += 8;
