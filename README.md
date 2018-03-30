@@ -3,6 +3,7 @@ things about the FirstClass protocol
 
 * [Constants](./constants.md)
 * [Debug](./debug.md)
+* [Docedit format](./docedit.md)
 * [Encryption](./encryption.md)
 * [Internal client structs](./internal_structs.md)
 * [Logging in](./login.md)
