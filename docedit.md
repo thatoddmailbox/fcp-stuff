@@ -1,7 +1,7 @@
 # Docedit format
 Seems to be made up of the plaintext and another binary blob describing the styles and the "runs" of text where the styles apply. These structs and things refer to the binary "docedit" blob.
 
-A docedit blob always starts with a fixed header of 0x30 bytes. Immediately after this header comes a fixed number of font structs, for the number of fonts specified in the header. There's some unknown weirdness followed by a fixed number of style structs.
+A docedit blob always starts with a fixed header of 0x30 bytes. Immediately after this header comes a fixed number of font structs, for the number of fonts specified in the header. There's 6 bytes of some unknown weirdness followed by a fixed number of style structs, which is then immediately followed by a fixed number of run structs.
 
 ## Docedit structs
 ### Header
@@ -33,9 +33,9 @@ Always a fixed 0x30 bytes. This data is **big endian** over the wire, but FirstC
 
 ### Style
 ```
-0x0: uint32_t - class ID, basically a unique id for the style that is used to refer to it by the runs
+0x0: uint32_t - class ID, seems to always be 0x000000D0
 0x4: uint32_t - attributes
-0x8: uint32_t - name (seems to always be the same 0x000103DE?)
+0x8: uint32_t - name (seems to always be 0xFFFFFFFF?)
 0xC: uint16_t - "xNumSpecIdx", the ID of the numspec for this style
 0xE: uint16_t - "xRevIdx", the ID of the revision for this style
 0x10: uint16_t - justification
@@ -76,6 +76,21 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 0xC: uint16_t: row border width
 0xE: uint32_t: border color, presumably 32-bit RGBA
 ```
+
+### Run
+```
+0x0: uint32_t: run length
+0x4: uint32_t: style index
+0x8: uint32_t: object index
+```
+
+### Sizing
+* 0x30
+* each object: 34 bytes
+* each font: 10 bytes
+* each revision: 16 bytes
+* each numspec:
+
 
 ## Internal structs
 ### CDocTranslator
