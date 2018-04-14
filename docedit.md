@@ -1,7 +1,7 @@
 # Docedit format
 Seems to be made up of the plaintext and another binary blob describing the styles and the "runs" of text where the styles apply. These structs and things refer to the binary "docedit" blob.
 
-A docedit blob always starts with a fixed header of 0x30 bytes. Immediately after this header comes a fixed number of font structs, for the number of fonts specified in the header. There's 6 bytes of some unknown weirdness followed by a fixed number of style structs, which is then immediately followed by a fixed number of run structs.
+A docedit blob always starts with a fixed header of 0x30 bytes. Immediately after this header comes a fixed number of font structs, for the number of fonts specified in the header. Then come the numspec structs, style structs, and run structs, in that order. After that comes the binary record section, which contains multiple binary records. These records assign names to fonts , set document properties, and do other, unclear things. The size of the binrec section is supposed to be given in the header in field 0x1E, as binrec entries are variable size. However, this size seems to be inaccurate?
 
 ## Docedit structs
 ### Header
@@ -15,8 +15,8 @@ Always a fixed 0x30 bytes. This data is **big endian** over the wire, but FirstC
 0x0E: uint32_t - numspec count
 0x12: uint32_t - run count
 0x16: uint32_t - style count
-0x1A: uint32_t - bin rec (?) count
-0x1E: uint32_t - bin len (?)
+0x1A: uint32_t - bin rec count
+0x1E: uint32_t - binary data len
 0x22: uint32_t - text length
 0x26: uint16_t - next object idx
 0x28: uint32_t - source info (?)
@@ -84,13 +84,27 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 0x8: uint32_t: object index
 ```
 
+### Numspec
+```
+0x0: uint32_t: index
+0x4: uint16_t: spare (?)
+```
+
 ### Sizing
-* 0x30
+* header: 48 bytes
 * each object: 34 bytes
 * each font: 10 bytes
 * each revision: 16 bytes
-* each numspec:
-
+* each numspec: 6 bytes
+* each style: 60 bytes
+* each run: 12 bytes
+* add binlen (from header)
+* add text length (from header, but seems to always be zero?)
+if you've got here and there are more than 8 bytes, there's an overlay header
+* overlay header: 2 bytes
+* overlay objects: ???
+* overlay styles: ???
+* each binrec: ??? bytes
 
 ## Internal structs
 ### CDocTranslator
