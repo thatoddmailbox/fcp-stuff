@@ -23,12 +23,39 @@ Always a fixed 0x30 bytes. This data is **big endian** over the wire, but FirstC
 0x2C: uint32_t - document properties
 ```
 
+### Object
+```
+0x00: uint32_t - class ID
+0x04: uint16_t - data type
+0x06: uint32_t - obj data
+0x0A: uint32_t - comment
+0x0E: uint32_t - height
+0x12: uint32_t - width
+0x16: uint32_t - attachment index
+0x1A: uint32_t - attachment name
+0x1E: uint32_t - crc
+```
+
 ### Font
 ```
 0x0: uint16_t - charset
 0x2: uint16_t - direction
 0x4: uint16_t - context sense (?)
 0x6: uint32_t - name (except it actually seems to be a number that refers to a string later in the blob)
+```
+
+### Revision
+```
+0x00: uint32_t - timestamp
+0x04: uint32_t - author
+0x08: uint32_t - URL
+0x0C: uint32_t - comment
+```
+
+### Numspec
+```
+0x0: uint32_t: index
+0x4: uint16_t: spare (?)
 ```
 
 ### Style
@@ -82,12 +109,6 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 0x0: uint32_t: run length
 0x4: uint32_t: style index
 0x8: uint32_t: object index
-```
-
-### Numspec
-```
-0x0: uint32_t: index
-0x4: uint16_t: spare (?)
 ```
 
 ### Sizing
