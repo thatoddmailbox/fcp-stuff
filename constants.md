@@ -241,3 +241,88 @@ Always equal to `2171034441`.
 | name | number |
 | ---- | ------ |
 | UTF-8 | 65001 |
+
+## Object class IDs
+| name | number | extended |
+| ---- | ------ | -------- |
+| CBodyText | 48 | * |
+| CBodyPicture | 49 |   |
+| CBodyLink | 50 | * |
+| CBodyLabel | 51 | * |
+| CBodyRule | 52 |   |
+| CBodyDocProps | 202 | * |
+| CBodyQuote | 213 | * |
+| CBodyPageBreak | 214 |   |
+| CBodyParaRenumBreak | 217 | * |
+| CBodyTable | 220 | * |
+| CBodyCell | 221 | * |
+| CBodySlideProps | 222 | * |
+
+Anything else gets classified as a "CWeirdBodyObject".
+
+### Extended classes
+The logic for determining if a class is "extended" looks something like this:
+```c
+if (classId > 209) {
+	if (classId < 211) {
+		return true;
+	} else {
+		if (classId <= 212) {
+			return false;
+		} else {
+			if (classId != 214) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+} else {
+	if (classId >= 208) {
+		return false;
+	} else {
+		if (classId == 49) {
+			return false;
+		} else {
+			if (classId == 52) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+}
+```
+
+
+## Object data types
+| name | number |
+| ---- | ------ |
+| dtNull | 0 |
+| dtCFile | 1 |
+| dtGenericFileInfo | 2 |
+| dtCreateCFile | 3 |
+| dtFCObject | 4 |
+| dtPCText | 6 |
+| dtMacPICT | 7 |
+| dtMacCICN | 8 |
+| dtMacSnd | 9 |
+| dtMSWDIB | 10 |
+| dtMSWWAV | 11 |
+| dtRTF | 12 |
+| dtSAStyledText | 13 |
+| dtMacStylText | 14 |
+| dtURL | 15 |
+| dtFCPoint | 16 |
+| dtFCFields | 17 |
+| dtFCForms | 18 |
+| dtURLName | 19 |
+| dtFileContents | 20 |
+| dtFCBlobData | 21 |
+| dtFCToolBarPlace | 22 |
+| dtFCGif | 23 |
+| dtPNG | 24 |
+| dtUnixPixmap | 25 |
+| dtUnixText | 26 |
+| dtHTML | 27 |
+| dtText | 39 |

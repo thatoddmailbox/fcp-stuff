@@ -111,6 +111,23 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 0x8: uint32_t: object index
 ```
 
+### Binary data
+This is a chunk of data equal to the "binary data len" (field 0x1E) of the header. It contains important details like font names and where links go, but not much is known about the format.
+
+### Overlay
+After the binary data comes the overlay information. It's a similar format to the main document.
+#### Header
+```
+0x0: uint32_t: style count
+0x4: uint32_t: object count
+```
+
+#### Overlay object
+This struct is the same as a regular object struct, but is prefixed by an index, of type `uint32_t`.
+
+#### Overlay style
+This struct is the same as a regular style struct, but is prefixed by an index, of type `uint32_t`.
+
 ### Sizing
 * header: 48 bytes
 * each object: 34 bytes
