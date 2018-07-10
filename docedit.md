@@ -41,7 +41,7 @@ Always a fixed 0x30 bytes. This data is **big endian** over the wire, but FirstC
 0x0: uint16_t - charset
 0x2: uint16_t - direction
 0x4: uint16_t - context sense (?)
-0x6: uint32_t - name (except it actually seems to be a number that refers to a string later in the blob)
+0x6: uint32_t - name (refers to the binrec index of the name)
 ```
 
 ### Revision
@@ -112,7 +112,7 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 ```
 
 ### Binary data
-This is a chunk of data equal to the "binary data len" (field 0x1E) of the header. It contains important details like font names and where links go, but not much is known about the format.
+This section is a chunk of data equal to the "binary data len" (field 0x1E) of the header. It's composed of a certain number of "binrecs" (BINary RECords), the number of which can be found in the header (field 0x1A). Each binrec has a `uint32_t` size, and is then followed by than many bytes of binary data. The data by itself doesn't mean anything; however, fields of other things will refer to binrecs. For example, the "name" field of a font is actually an index, indicating which binrec contains the name of the font. Binrecs can also point to other binrecs. For example, a link object will have the "data" field of the object struct pointing to a binrec that's actually a struct describing the link, and that struct will point to other binrecs for things like the link URL and name.
 
 ### Overlay
 After the binary data comes the overlay information. It's a similar format to the main document.
@@ -129,6 +129,7 @@ This struct is the same as a regular object struct, but is prefixed by an index,
 This struct is the same as a regular style struct, but is prefixed by an index, of type `uint32_t`.
 
 ### Sizing
+_you should probably ignore this section_
 * header: 48 bytes
 * each object: 34 bytes
 * each font: 10 bytes

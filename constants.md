@@ -243,6 +243,7 @@ Always equal to `2171034441`.
 | UTF-8 | 65001 |
 
 ## Object class IDs
+these also may apply to styles?
 | name | number | extended |
 | ---- | ------ | -------- |
 | CBodyText | 48 | * |
@@ -295,7 +296,7 @@ if (classId > 209) {
 ```
 
 
-## Object data types
+## Object data types (tDropDataType)
 | name | number |
 | ---- | ------ |
 | dtNull | 0 |
@@ -303,6 +304,7 @@ if (classId > 209) {
 | dtGenericFileInfo | 2 |
 | dtCreateCFile | 3 |
 | dtFCObject | 4 |
+| dtNonUnicodeText | 5 |
 | dtPCText | 6 |
 | dtMacPICT | 7 |
 | dtMacCICN | 8 |
@@ -325,4 +327,17 @@ if (classId > 209) {
 | dtUnixPixmap | 25 |
 | dtUnixText | 26 |
 | dtHTML | 27 |
+| dtJPEG | 28 |
+| tdFCuf | 29 |
+| tdFCft | 30 |
+| tdFCfs | 31 |
+| dtFCSD | 32 |
+| dtFCSTRS | 33 |
+| dtFCSTRING | 34 |
+| dtRTFFCML | 35 |
+| dtXML | 36 |
+| dtMP3 | 37 |
+| dtATSUIStyles | 38 |
 | dtText | 39 |
+| dtUniTextNoBOM | 40 |
+| dtUniText | 41 |
