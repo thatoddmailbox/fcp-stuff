@@ -243,7 +243,6 @@ Always equal to `2171034441`.
 | UTF-8 | 65001 |
 
 ## Object class IDs
-these also may apply to styles?
 | name | number | extended |
 | ---- | ------ | -------- |
 | CBodyText | 48 | * |
@@ -260,6 +259,35 @@ these also may apply to styles?
 | CBodySlideProps | 222 | * |
 
 Anything else gets classified as a "CWeirdBodyObject".
+
+## Style class IDs
+| name | number |
+| ---- | ------ |
+| CTextStyle | 208 |
+| CPictureStyle | 209 |
+| CMarkerStyle | 210 |
+| CRuleStyle | 211 |
+| CPageBreakStyle | 212 |
+| CTableStyle | 219 |
+
+Anything else gets classified as a "CRogueStyle".
+
+## Style attribute flags
+These are masks used to test the individual bits of the (four byte, `uint32_t`) attributes field of a style.
+| bitmask | name |
+| ------- | ---- |
+| 0b00000000000000000000000000000001 | Found Link |
+| 0b00000000000000000000000000000010 | Quoted |
+| 0b00000000000000000000000000000100 | Temp |
+| 0b00000000000000000000000000001000 | MachGen |
+| 0b00000000000000000000000000010000 | LitHTML |
+| 0b00000000000000000000000000100000 | IMEConv |
+| 0b00000000000000000000000001000000 | Hidden |
+| 0b00000000000000000000000010000000 | ??? |
+| 0b00000000000000000000000100000000 | Marker |
+| 0b00000000000000000000001000000000 | UseBG |
+| 0b00000000000000000000010000000000 | Link Obj |
+| 0b00000000000000000001000000000000 | InTable |
 
 ### Extended classes
 The logic for determining if a class is "extended" looks something like this:
@@ -294,7 +322,6 @@ if (classId > 209) {
 	}
 }
 ```
-
 
 ## Object data types (tDropDataType)
 | name | number |

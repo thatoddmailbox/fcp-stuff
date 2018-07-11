@@ -114,6 +114,17 @@ There are then two possibilities for the remaining 0x12 bytes, depending on what
 ### Binary data
 This section is a chunk of data equal to the "binary data len" (field 0x1E) of the header. It's composed of a certain number of "binrecs" (BINary RECords), the number of which can be found in the header (field 0x1A). Each binrec has a `uint32_t` size, and is then followed by than many bytes of binary data. The data by itself doesn't mean anything; however, fields of other things will refer to binrecs. For example, the "name" field of a font is actually an index, indicating which binrec contains the name of the font. Binrecs can also point to other binrecs. For example, a link object will have the "data" field of the object struct pointing to a binrec that's actually a struct describing the link, and that struct will point to other binrecs for things like the link URL and name.
 
+### Objects
+This describes certain object structs. These are stored as binrecs that are pointed to by the "data" field of objects (you can check the "class ID" field to determine which struct to use)
+
+#### CBodyLink (class ID 50)
+```
+0x0: uint32_t: destination
+0x4: uint32_t: target
+0x8: uint32_t: title
+0xC: uint16_t: flags
+```
+
 ### Overlay
 After the binary data comes the overlay information. It's a similar format to the main document.
 #### Header
