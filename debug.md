@@ -23,3 +23,5 @@ To do this, use a hex editor to find the sequence `0F 85 35 00 00 00 66 8B` and 
 
 
 The most useful option is `p`, which opens a packet debugging window that shows you what packets are sent and received for different actions.
+
+Another useful binary patch (FOR FIRSTCLASS 16.103 ON OS X) is changing addresses 0x864F-0x8652 (which should be all 0x00) to be 0xFF and address 0x8653 to 0x7F. This is where in the code _gFCPDebugLevel is set, and will change it from being zero to the maximum signed 32-bit integer, enabling all FCP debug logs.
