@@ -78,6 +78,7 @@ This is a list of constants that FCP uses. It is ~~probably~~ not exhaustive.
 
 ### Error codes
 Note: A lot of these are unused/irrelevant to modern-day FirstClass
+
 | name | number |
 | ---- | ------ |
 | NoError | 0 |
