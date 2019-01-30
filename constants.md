@@ -927,6 +927,23 @@ if (classId > 209) {
 | fcpServerTicket | 11 |
 | whatever mysterious thing firstclass web services uses | 14 |
 
+### Reply methods
+| name | number |
+| ---- | ------ |
+| roNormal | 0 |
+| roReplyAll | 1 |
+| roReplySender | 2 |
+| roReplyConf | 3 |
+| roReplySenderNDN | 4 |
+| roReplyOriginator | 5 |
+| roUseDefault | 6 |
+| roReplyAccept | 7 |
+| roReplyDecline | 8 |
+| roReplyAcceptComment | 9 |
+| roReplyDeclineComment | 10 |
+| roReplyTentative | 11 |
+| roReplyTentativeComment | 12 |
+
 ### Logout warning types
 | name | number |
 | ---- | ------ |
